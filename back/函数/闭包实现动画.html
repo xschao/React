@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    button{
+        position: absolute;
+    }
+  </style>
+</head>
+<body>
+<button>点击我开始移动</button>
+<button>点击我开始移动</button>
+<button>点击我开始移动</button>
+</body>
+<script type="text/javascript">
+    /*
+    * 在内存中保存了上一次的值
+    * */
+   const btns = document.querySelectorAll("button");
+   btns.forEach(item=>{
+       // let left = 1;
+       let interval = false; //解决动画越点越快的方式
+       item.addEventListener('click',function (){
+           if(!interval){
+               interval = true;//第一次开启定时器，下次则不会重复开启
+               let left = 1;  //定义再次会造成动画抖动
+               setInterval(function (){
+                   item.style.left = left++  + "px"
+                   console.log(left)
+               },50)
+           }
+
+       })
+   })
+    /*
+    * 动画为什么再次点击的时候会抖动：
+    * 因为，left的作用域每次都处在事件点击函数的作用域之内，再次点击后，
+    * 会产生一个新的函数和环境，left的值
+    * 会重新再次计数，所以出现抖动情况
+    * 解决方式：
+    * 1、将left变量的作用域体制点击函数之外
+    * 2、当添加标准位的时候，可以将left放入if()块中，left也不会重新计数
+    * */
+
+    /*
+    * 动画为什么不断点击速度会越来越快：
+    * 再次点击后，会产生一个新的函数和环境，因此，每点击一次会产生一个新的定时器，
+    * 所以速度会加快
+    * 解决方式：清除再次点击产生的定时器
+    *  利用一个标识位，防止定时器多次开启
+    * */
+
+</script>
+</html>

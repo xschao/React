@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+  /*
+  * 回调是一个函数，将其作为参数传递给另一个函数，然后由其他函数调用 。
+  *  回调传递给的函数通常称为高阶函数。 相反，高阶函数通过将其他函数作
+  * 为参数或通过将其返回来对其他函数进行操作
+  * */
+
+  "use strict"
+  function add(callback){
+      console.log("正在累加");
+      callback()
+  }
+  function callback(){
+      console.log("累加完成...")
+  }
+  add(callback)
+
+  function test(value){   //这就是回调函数
+      console.log(value)
+  }
+  function main(test,value){ //test作为一个参数传递进来
+      console.log("主函数在执行")
+      test(value+"，待主函数执行完后执行")     // 我是回调函数
+  }
+  main(test,'我是回调函数')
+</script>
+</html>

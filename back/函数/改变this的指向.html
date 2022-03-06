@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button class="btn">1</button>
+<button class="btn">2</button>
+<button class="btn" name="add">3</button>
+</body>
+<script type="text/javascript">
+  /*
+  * 1，call()、apply()、bind() 都是用来重定义 this 这个对象的
+  * */
+  var name='小明',age=10;
+  var obj = {
+      name:'小花',
+      age:this.age, //this->全局
+      myFunc:function (){
+          //this指向的当前对象的实例 this->obj实例
+          console.log(this.name+"年龄:"+this.age+"this:"+JSON.stringify(this));
+      }
+  }
+  var obj1 = {
+      name:'小苗',
+      age:3
+  }
+  //借用其他对象的方法来实现类似的逻辑，可以通过以下几个方法来改变this的指向
+  //与其他不同的是，bind 返回的是一个新的函数，调用它才会被执行
+  obj.myFunc.bind(obj1)();
+  obj.myFunc.call(obj1);
+  obj.myFunc.apply(obj1);
+  console.log(obj)
+
+  /*
+  * 如下面的应用 ，借用原型链中的方法
+  * */
+  let hd = {
+      data :[2,22,64,2,6,7,45]
+  }
+  Object.setPrototypeOf(hd,{
+      max(){
+          // console.log(this.data)
+          return this.data.sort((a,b)=>b-a)[0];
+      }
+  })
+  let hd1 = {
+      score:{math:88,english:100,chinese:90},
+      get data(){
+          // console.log(Object.values(this.score))
+          return Object.values(this.score)
+      }
+  }
+  console.log(hd.max())
+  console.log(hd1)
+  //使用call活着apply借用原型链中的方法
+  console.log(hd.max.apply(hd1))
+
+  /*
+  * 别的对象，借用数组对象中的方法
+  * */
+  let arr = [2,5,3,5,53]
+  let res = arr.filter(i=>{
+      return i>10
+  });
+  console.log(res)
+  let btns = document.querySelectorAll("button");
+  btns = Array.prototype.filter.call(btns,item=>{
+      //过滤按钮
+      return item.hasAttribute("name")
+  })
+  //从原型链去找，数组对象
+  // btns = [].filter.call(btns,item=>{
+  //     //过滤按钮
+  //     return item.hasAttribute("name")
+  // })
+  console.log(btns[0].innerHTML)
+  //
+</script>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    //模块导出引擎
+    let module = (function () {
+        //定义一个对象容器，存储依赖模块集合
+        const moduleList = {}
+
+        /*
+        * name:定义的模块名字
+        * modules：是否依赖其他模块
+        * action: 模块的动作
+        * */
+        function define(name, modules, action) {
+            //从容器中获取模块
+            modules.map((module, index) => {
+                modules[index] = moduleList[module];
+            })
+            //向模块集合中，添加模块,每次定义一个新的模块将模块压入其中
+            moduleList[name] = action.apply(null,modules)
+            // console.log("moduleList:",moduleList)
+        }
+
+        return {define}
+    })();
+
+    function getArgs(func) {
+        // 首先匹配函数括弧里的参数
+        var args = func.toString().match(/function\s.*?\(([^)]*)\)/)[1];
+
+        // 分解参数成数组
+        return args.split(",").map(function (arg) {
+            // 去空格和内联注释
+            return arg.replace(/\/\*.*\*\//, "").trim();
+        }).filter(function (arg) {
+            // 确保没有undefineds
+            return arg;
+        });
+    }
+
+    module.define("utils", [], function () {
+        console.log("utils module")
+        //定义的模块，最终就是将功能暴露出来==>function（）{}
+        return {
+            first(arr) {
+                return arr[0]
+            },
+            max(arr, key) {
+                return arr.sort((a, b) => b[key] - a[key])[0]
+            }
+        }
+    });
+    module.define("goodsList", ["utils"], function (utils) {
+        console.log("goodsList module")
+        let goods = [
+            {
+                id: 1,
+                name: "小米手机",
+                price: 1999
+            }, {
+                id: 2,
+                name: "华为手机",
+                price: 3999
+            }, {
+                id: 1,
+                name: "魅族手机",
+                price: 2999
+            }
+        ]
+        console.log(utils.first(goods))
+        console.log(utils.max(goods,"price"))
+    })
+    module.define("person", [], function () {
+        // console.log("person module")
+        return function () {
+            return "person"
+        }
+    })
+</script>
+</html>

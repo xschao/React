@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+      button{
+          position: absolute;
+      }
+  </style>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+    /*
+    * 将重复的代码逻辑提取出来，根据参数的标识来决定执行
+    * */
+    /*
+    * 需求，对id或者age进行排序
+    * 解决方法，因为排序的逻辑都是类似的，只是传递的排序方式不同，
+    * 因此我们可以利用闭包
+    * */
+    let persons = [
+        {
+            id:1,
+            age:20
+        },
+        {
+            id:3,
+            age:22
+        }, {
+            id:2,
+            age:21
+        }, {
+            id:4,
+            age:24
+        }
+    ]
+    //传递不同的参数，将比较的值返回
+    function order(filed,type = 'asc'){
+        return function (a,b){
+            if (type=='asc'){
+                return a[filed] - b[filed]
+            }else {
+                return b[filed] - a[filed]
+            }
+        }
+    }
+    // 原始写两套
+    // console.log(persons.sort((a,b)=>{
+    //     return  b.id - a.id;
+    // }))
+    console.log(persons.sort(order('age',"asc")))
+
+
+</script>
+</html>

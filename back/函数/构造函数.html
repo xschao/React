@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+  function person(){
+      this.name = "xsc";
+      this.age = 12
+      this.get = function (params){
+          console.log(params)
+          console.log(Object.keys(params))
+      }
+  }
+  let a = new person();
+  console.log(a.get({id:1,sex:"man"}))
+</script>
+</html>

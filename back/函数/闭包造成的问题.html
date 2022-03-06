@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+      button{
+          position: absolute;
+      }
+  </style>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+   /*
+   * 闭包带来的内存泄漏问题：
+   * 原因：当我们在操作大量数据时，比如DOM元素，这些数据如果函数没有销毁则会一直
+   * 存在内存当中，会造成内存的大大浪费
+   * 解决方法：
+   * 我们可以在取得数据处理完毕之后，将其赋值为空
+   * */
+
+
+   /*
+   * 历史遗留问题；this的指向问题
+   * 解决方法：1.箭头函数 2.赋值，将其作用域提示
+   * */
+    "use strict"
+   let md = {
+       name:"xsc",
+       get:function (){
+           //let _this = this
+           return  ()=>{
+               return this.name
+           }
+       }
+   }
+   console.log(md.get())//输出的是此函数
+   // 此时 this的指向为window，所以为undefined
+   // md.get()()
+   // let a = md.get() //此时该对象已经挂在到window上 ，因此this指向window是
+   // a();
+   console.log(md.get()())//调用该函数
+</script>
+</html>
