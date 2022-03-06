@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    /*
+    * Promise 异步操作有三种状态：pending（进行中）、fulfilled（已成功）
+    * 和 rejected（已失败）。除了异步操作的结果，任何其他操作都无法改变这个状态。
+
+      Promise 对象只有：从 pending 变为 fulfilled 和从 pending
+    * 变为 rejected 的状态改变。只要处于 fulfilled 和 rejected ，
+    * 状态就不会再变了即 resolved（已定型）。
+    * */
+    /*
+    * resolve 和 reject接受的都是一个Promise对象
+    * then 返回的也是一个 Promise对象向
+    * 这个Promise状态是可以传递的，不能进行改变
+    * */
+    let p = new Promise((resolve, reject) => {
+        resolve("成功")
+    }).then(null,reason => {})
+    new Promise((resolve, reject) => {
+          resolve(p)
+    }).then(value => {
+        console.log(value)
+    },reason => {
+        console.log(reason)
+    })
+
+    let p1 = new Promise((resolve, reject) => {
+        resolve("state:fulfilled 已成功")
+    })
+    console.log(p1)
+    let p2 = p1.then(value => {
+        console.log(value)
+    },reason => {
+        console.log(reason)
+    })
+    console.log("p2....state:pending",p2)
+    setTimeout(()=>{
+        console.log("p2...state:resolved",p1)
+    },2000)
+</script>
+</html>

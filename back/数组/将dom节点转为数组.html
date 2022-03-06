@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div >1</div>
+<div >2</div>
+<div >3</div>
+</body>
+<script type="text/javascript">
+    /*
+    *  document.querySelectorAll("div");返回一个NodeList集合
+    * NodeList 对象是一个从文档中获取的节点列表 (集合) 。
+    * */
+    const div = document.querySelectorAll("div");
+    console.log(div)
+    //将div转化为 数组  Array.from方法
+    Array.from(div).map((item)=>{
+        console.log(item)
+    });
+    //使用原型链的方式
+    [].map.call(div,(item)=>{
+        console.log(item)
+    })
+    //使用展开运算符的形似
+    console.log([...div])
+</script>
+</html>

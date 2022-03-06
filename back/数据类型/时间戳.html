@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+    时间处理库 moment.js
+</body>
+<script type="text/javascript">
+    const date = new Date();
+    console.log(date)
+    //对象类型
+    console.log(typeof date)
+    //========================返回的是一个时间戳====================
+    console.log(date*1)
+
+    const dateStr = Date();
+    console.log(dateStr)
+    //是一个字符类型
+    console.log(typeof dateStr)
+    //返回的NaN
+    console.log(dateStr*1)
+
+    //========================返回的是一个时间戳====================
+    console.log(Date.now())
+
+
+    /*
+    *
+    * ===========计算脚本执行的时间=============
+    *   利用时间戳和console.time(“标识信息”)
+    * */
+    console.time("for")
+    for (let i = 0; i <1000000; i++) {
+          ;
+    }
+    console.timeEnd("for")
+</script>
+</html>

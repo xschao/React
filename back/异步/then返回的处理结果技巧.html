@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    /*
+    * then存在的意义
+    * 有些请求传递的参数要分步骤进行处理
+    * 因此，我们可以使用then语法防止回调地狱的写法
+    * */
+
+    //*   需求: 取用户订单信息
+    let getUserOrder = new Promise((resolve, reject) => {
+        console.log("开始获取用户订单信息")
+        resolve("获取用个人信息成功");
+    }).then(value => {
+        console.log(value)
+        return new Promise((resolve, reject) => {
+            reject("根据个人信息获取订单信息失败")
+        })
+    }, reason => {
+        null
+    }).then(value => {
+       null
+    }, reason => {
+        console.log(reason)
+        return new Promise((resolve, reject) => {
+            resolve("再次根据个人信息获取订单信息")
+        })
+    }).then(value => {
+        console.log(value)
+        console.log("结束")
+    },reason => {null
+    })
+    console.log(getUserOrder)
+    setTimeout(()=>{
+        console.log(getUserOrder)
+    })
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+      .remove{
+        background-color: #2b542c;
+      }
+      .display{
+          background-color: #ffffff;
+      }
+  </style>
+</head>
+<body>
+<ul>
+  <li>第一节</li>
+  <li>第二节</li>
+  <li>第三节</li>
+  <li>第四节</li>
+</ul>
+点击标签删除 绿色背景已删除，白色背景回复状态
+</body>
+<script type="text/javascript">
+    "use strict"
+
+    class TodoList {
+        constructor() {
+            this.items = document.querySelectorAll("ul>li")
+            this.lists = new Set();
+            this.items.forEach(item => {
+                this.lists.add(item)
+            })
+        }
+        run(){
+            this.addEvent()
+        }
+        addEvent(){
+          this.items.forEach(item=>{
+              item.addEventListener('click',event=>{
+                  const liElement = event.target;
+                  if(this.lists.has(liElement)){
+                      liElement.classList.add("remove")
+                      this.lists.delete(liElement)
+                      alert("已删除")
+                  }else {
+                      liElement.classList.remove("remove")
+                      this.lists.add(liElement)
+                      alert("已恢复")
+                  }
+              })
+          })
+        }
+    }
+    new TodoList().run();
+</script>
+</html>

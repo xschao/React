@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input type="text" v-model="title"/>
+<input type="text" v-model="title"/>
+<input type="text" v-model="title"/>
+<h4 v-bind="title">这里也会发生变化</h4>
+</body>
+<script type="text/javascript">
+  /*
+  * 双向绑定的方式有很多种
+  * 如：https://zhuanlan.zhihu.com/p/25464162
+  * 而Model的变化监听方式可以有多种，主要有以下几种： 发布订阅模式（Backbone），
+  * 数据劫持 加 发布和订阅（VueJS，AvalonJS），数据脏检查（Angularjs，RegularJS），
+  *  View抽象的脏检查（ReactJS）
+  * */
+
+  /*
+  * 利用代理来实现数据的双向绑定
+  * 1、准备一个目标对象，将输入的数据存储至目标对象
+  * 2、并随时监控目标对象，当目标对象改变时，我们去通知其他绑定该目标对象数据的人
+  * 3、刷新绑定该对象的视图
+  * */
+
+
+  function View(){
+      /*
+      * 1、创建一个空的代理目标对象
+      * */
+      let proxy = new Proxy({},{
+          get(target, p) {
+
+          },set(target, p, value) {
+              /*
+              * 4、改变绑定对象的组件
+              * */
+              let inputs = document.querySelectorAll(`[v-model="${prooerty}"]`);
+              inputs.forEach(item=>{
+                  item.value = value
+              })
+              let h4 = document.querySelectorAll(`[v-bind="${prooerty}"]`);
+              h4.forEach(item=>{
+                  item.innerHTML = value
+              })
+          }
+      });
+
+      /*
+      * 2、随时监控目标对象
+      * */
+      this.init = function (){
+          let inputs = document.querySelectorAll("[v-model]");
+          inputs.forEach(item => {
+              item.addEventListener("keyup",function (){
+                  /*
+                  * 3、将数据传递给代理对象
+                  * */
+                  proxy[this.getAttribute('v-model')] = this.value
+              })
+          })
+      }
+  }
+  let view = new View()
+  view.init()
+</script>
+</html>

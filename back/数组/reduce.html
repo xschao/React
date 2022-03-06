@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+    /*
+    * 可以实现汇总、统计、筛选、去重、最值
+    * */
+    var numbers = [1, 21, 3, 4, 1, 1, 1];
+    let initialValue = 0;
+    //pre 上一次的返回值，起初调用的时候时  arr[0]
+    //initialValue 为pre的初始值
+    //返回上次调用回调函数的累积结果
+    const value = numbers.reduce((pre, curr, currIndex, arr) => {
+        console.log(pre, curr)
+        return 0
+    }, initialValue)
+    console.log(value)
+
+    /*
+    * 实际用途，统计重复元素出现的次数
+    * */
+    function countNumber(arr, item) {
+        return arr.reduce((total, curr) => {
+            // if(item===curr){
+            //     total++
+            // }
+            // return total
+            total += item == curr ? 1 : 0
+            return total
+        }, 0)
+    }
+
+    console.log(countNumber(numbers, 1))
+
+    /*
+    * 获取最值
+    * */
+    function getMaxValue(arr) {
+        return arr.reduce((pre, curr) => {
+            return pre > curr ? pre : curr
+        }, 0)
+    }
+
+    console.log("max:" + getMaxValue(numbers))
+
+    /*
+     * 汇总
+     * */
+    function getTotalValue(arr) {
+        return arr.reduce((total, curr) => {
+            return total += curr
+        }, 0)
+    }
+
+    console.log("total:" + getTotalValue(numbers))
+    /*
+    * 获取年龄大于20岁的人 =====筛选=========
+    * */
+    let person = [
+        {name: "xsc1", age: 11, sex: "m"},
+        {name: "xsc2", age: 41, sex: "m"},
+        {name: "xsc3", age: 31, sex: "m"},
+        {name: "xsc3", age: 31, sex: "m"},
+        {name: "xsc4", age: 21, sex: "w"}
+    ]
+
+    //获取年龄大于20岁的人的姓名
+    function getSomePerson(persons, age) {
+        return persons.reduce((newPerson, curr) => {
+            if (curr.age > age) {
+                newPerson.push(curr)
+            }
+            return newPerson
+        }, []).map((item) => {
+            return item.name
+        });
+    }
+    console.log("age>20:",getSomePerson(person, 20))
+    //去重
+    function filterPerson(persons) {
+        return persons.reduce((newPerson,curr)=>{
+            //如果查找到返回值，否则是undefined
+           let person = newPerson.find((item)=>{
+                return item.name == curr.name
+            })
+            if(!person) newPerson.push(curr)
+            //把上次找到的人存进去，去除重复姓名的人
+            return newPerson
+        },[])
+
+    }
+    //找到返回该对象，否则是undefined
+    // let arr = [];
+    // let findPerson = person.find(item=>{
+    //     return item.name = "xsc1"
+    // })
+    //
+    // console.log("find:",findPerson)
+    console.log("filter:",filterPerson(person))
+</script>
+</html>

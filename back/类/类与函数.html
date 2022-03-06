@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    /*
+    * 类就是函数的语法糖
+    * */
+    let f1 = function (){
+        this.show = show()
+    }
+    class F{
+        constructor(props) {
+           this.props = props
+        }
+        show(){}
+    }
+
+    //都是函数类型
+    // console.log(typeof f1)
+    // console.log(typeof F)
+    console.dir(f1)
+    console.dir(F)
+</script>
+</html>

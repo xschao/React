@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="moment.min.js"></script>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'))
+    console.log(moment('1991-02-12',).format('YYYY-MM-DD HH:mm:ss'))
+
+
+    moment("20111031", "YYYYMMDD").fromNow(); // 10 年前
+    moment("20120620", "YYYYMMDD").fromNow(); // 10 年前
+    moment().startOf('day').fromNow();        // 12 小时前
+    moment().endOf('day').fromNow();          // 12 小时内
+    moment().startOf('hour').fromNow();       // 1 小时前
+
+    moment().subtract(10, 'days').calendar(); // 2022/02/20
+    moment().subtract(6, 'days').calendar();  // 上星期四11:48
+    moment().subtract(3, 'days').calendar();  // 上星期日11:48
+    moment().subtract(1, 'days').calendar();  // 昨天11:48
+    moment().calendar();                      // 今天11:48
+    console.log(moment().add(1, 'days').format('YYYY-MM-DD HH:mm:ss'))      // 明天11:48
+    moment().add(3, 'days').calendar();       // 下星期六11:48
+    moment().add(10, 'days').calendar();      // 2022/03/12
+</script>
+</html>

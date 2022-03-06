@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    let person = {
+        id:1,
+        age:23
+    }
+    // //对向的展开和合并
+    // console.log({...person,address:"南昌"})
+    // //覆盖当前的属性 --->可以用该更改配置或者什么的应用
+    // console.log({...person,address:"九江"})
+
+    /*
+    * 解构赋值
+    * */
+    // let {id:id,age:age}=person;
+    // console.log(id)
+    // 当定义的解构对象和属性一直可以省略
+    // let {id,age}=person;
+    // console.log(age)
+    let{age} = person;
+    console.log(age)
+</script>
+</html>
