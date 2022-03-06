@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    /*
+    * 见： https://www.w3school.com.cn/jsref/jsref_obj_array.asp
+    * */
+    /*
+    * 入栈出栈
+    * */
+    let arr = ['a','b','c']
+    //入栈  返回length
+    console.log(arr.push(1))
+    //出栈
+    console.log(arr.pop(1));
+    //从栈顶入栈
+    console.log(arr.unshift('d'))
+    //返回出栈的元素
+    console.log(arr.shift(1))
+    console.log(arr)
+    /*
+    * 填充
+    * */
+    console.log(new Array(6).fill("1"))
+</script>
+</html>

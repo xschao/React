@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+   // let set = new Set();
+   // set.add(1);
+   // set.add("1")
+   // set.add(1)
+   // console.log(set)
+   let set1 = new Set([11,21,3,4,5,6])
+   //当为set集合时候，key和value返回的都是value
+   for (let key of set1.entries()) {
+       console.log(key)
+   }
+   for (let value of set1.values()) {
+       console.log(value)
+   }
+   // let arr1 = [1,2,3,4,5,6]
+   // let arr2 = [3,4,5,6,7,8]
+   // //并集
+   // console.log(new Set([...arr1,...arr2]))
+   // //交集
+   // const inter = arr1.filter((item)=>{
+   //     //返回在arr1中含有的元素
+   //     return new Set(arr2).has(item)
+   // })
+   // console.log(inter)
+   // //差集
+   // const diff = arr1.filter((item)=>{
+   //     //返回在arr1中含有的元素
+   //     return !(new Set(arr2)).has(item)
+   // })
+   // console.log(diff)
+</script>
+</html>
