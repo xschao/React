@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    let person =  {
+        /*
+        * 使用访问器保护数据
+        * */
+        data :{
+            id:1,
+            name:"xsc",
+            age:23,
+        },
+        /*
+        * 属性访问其
+        * */
+        set age(value){
+            console.log("set...")
+            this.data.age = value;
+        },
+        get age(){
+            console.log("get...")
+            return this.data.age;
+        }
+    }
+    // person.age = 12
+    // console.log(person.age)
+
+    /*
+    * 类只是函数形式的语法糖
+    * */
+    class Person{
+        constructor(name,age) {
+            //在其中增加了data属性，进行解构赋值
+            this.data = {name,age}
+            console.log(this.data)
+        }
+        set age(value){
+            this.data.age = value
+        }
+        get age(){
+            return this.data.age
+        }
+    }
+    let p = new Person("xsc",23);
+    p.age = 21;
+    console.log(p)
+    class A{
+        constructor(a, b) {
+            this.a = a; // 实例化时调用 set 方法
+            this.b = b;
+        }
+        get a(){
+            console.log('getter');
+            return this._a;
+        }
+        set a(a){
+            console.log('setter');
+            this._a = a; // 自身递归调用
+        }
+
+    }
+    console.log(new A(1,2))
+
+
+
+</script>
+</html>

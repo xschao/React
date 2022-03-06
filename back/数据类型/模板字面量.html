@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    //返回一个模板
+    function template(){
+        return "hello"
+    }
+   let person = {
+       name:"kevin",
+       age:12,
+       data() {
+           console.log(this)
+           console.log(`年龄：${this.age}    姓名:${this.name} ${show()}`)
+       }
+   }
+   person.data()
+</script>
+</html>

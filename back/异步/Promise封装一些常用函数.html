@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+      div{
+          height: 100px;
+          width: 100px;
+          background-color: red;
+          position: absolute;
+      }
+  </style>
+</head>
+<body>
+<div></div>
+</body>
+<script type="text/javascript">
+    /*
+    * 封装加载图片函数
+    * */
+    function loadImg(src){
+        return new Promise((resolve, reject) => {
+            let image = new Image();
+            image.src = src;
+            image.onload = () =>{
+                resolve(image)
+            }
+            image.onerror = reject;
+            document.body.appendChild(image);
+            console.log(image)
+        })
+    }
+    loadImg("./任务【宏微】调度调度顺序.png").then(img =>{
+        img.style.border = "solid 3px yellow"
+    })
+    /*
+    *  封装setTimeout
+    * */
+    function timeOut(delay=1000){
+        return new Promise((resolve) => {
+            //把这个回调函数返回回来
+           setTimeout(resolve,delay)
+        })
+    }
+    timeOut(3000).then(() => {
+        console.log("hello")
+    })
+    function inter(delay=100,callback){
+        return new Promise((resolve)=>{
+            let timerId = setInterval(()=>{
+                callback(timerId,resolve)
+            },delay)
+        })
+    }
+    inter(100,((timerId,resolve) => {
+        let div = document.querySelector("div");
+        let left = parseInt(window.getComputedStyle(div).left)
+        div.style.left = left  + 10 + 'px'
+        console.log("****************",left)
+        if(left>=100){
+            clearInterval(timerId)
+            //并改变Promise的状态,乡下传递
+            resolve(div)
+        }
+
+    })).then( div => {
+        return inter(100,((timerId,resolve) => {
+            let div = document.querySelector("div");
+            let left = parseInt(window.getComputedStyle(div).left)
+            div.style.left = left  - 10 + 'px'
+            console.log("****************",left)
+            if(left<=10){
+                clearInterval(timerId)
+                //并改变Promise的状态,乡下传递
+                resolve(div)
+            }
+        }))
+    }).then(div=>{
+        div.style.display = "none"
+    })
+</script>
+</html>

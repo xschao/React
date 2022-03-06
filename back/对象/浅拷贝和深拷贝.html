@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+     /*
+     * 浅拷贝：复制当前对象的属性和值(简单属性时)，当有嵌套对象（引用类型）则不能完全复制
+     *    证明：浅拷贝一个对象，改变拷贝对象中嵌套对象的属性值，源对象的属性值也改变
+     * 深拷贝：当对象中嵌套对象（引用类型）时，将其解构完全拷贝一份（空间和值）
+     *    证明：深拷贝一个对象，改变拷贝对象中嵌套对象的属性值，源对象的属性值不会改变
+     * */
+     let person = {
+         id:1,
+         name:"xsc",
+         age:23,
+         address:{
+             city:"江西",
+             detail:"202号"
+         },
+         tel:[]
+     }
+     /*
+     * =========================================
+     *          以下为对象的浅拷贝，不能拷贝深层对象
+     * =========================================
+     * */
+     //方法1 展开运算符
+     let my = {...person}
+     my.age = 24;
+     my.address.city = "九江"
+     // console.log(my)
+     //方法2 使用assign方法
+     let my1 = Object.assign({},person);
+     my1.name = "kevin"
+     // console.log(my1)
+     // console.log("person:",person)
+     /*
+      * =========================================
+      * 以下为对象的深拷贝，利用递归的形式将其（引用=>空间和值）拷贝
+      * =========================================
+      * */
+     //在开发的时候可以使用库来实现
+      function deepCopy(obj){
+          let res = obj instanceof Array ? [] : {};
+          /*
+          * 如果其中含有数组或者对象时，我们则继续递归拷贝
+          * */
+          for (const [k,v] of Object.entries(obj)) {
+              res[k] = typeof v == "object" ? deepCopy(v) : v;
+          }
+         return res
+      }
+     let deepCopy1 = deepCopy(person);
+     deepCopy1.tel.push("0123456789")
+     deepCopy1.address.city = "南昌"
+     //此时观察对象可知，我们完成了深拷贝
+     console.log(deepCopy1)
+     console.log(person)
+
+
+</script>
+</html>

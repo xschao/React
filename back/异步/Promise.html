@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+   /*
+   * Promise()对象
+   * 对于promise对象而言：resolve与reject中的代码是同步的
+   * then中的函数回调，不会阻塞主线程执行,因此会等主线程执行完成后才会执行回调函数
+   * 也从此，我们可以看出js是单线程的
+   * */
+
+
+   //setTimeout是宏任务
+   setTimeout(()=>{
+       console.log("宏任务")
+   },3)
+   console.log("主线程开始")
+   //Promise中的then是微任务
+   new Promise((resolve, reject) => {
+       // resolve('操作成功')
+       reject("操作失败")
+       console.log("。。。。。。。。。。")
+   }).then(value => {
+       console.log("成功的回调")
+   },reason => {
+       console.log("失败的额回调1")
+       }
+   ).//可以一直写下去
+   then(reason => {
+       console.log("失败的回调2")
+   }).catch(error=>{
+       console.log("同一的错位处理")
+       console.log(error)
+   })
+   for (let i = 0; i < 1000; i++) {
+       console.log(0)
+   }
+
+
+</script>
+</html>

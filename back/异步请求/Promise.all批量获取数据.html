@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+
+</body>
+<script src="./request.js"></script>
+<script type="text/javascript">
+    function query(ids){
+        let res = ids.map(id=>{
+            return ajax("http://localhost:3000/posts/"+id)
+        })
+       return Promise.all(res)
+    }
+    query(["1"]).then(value => {
+        console.log(value)
+    })
+</script>
+</html>

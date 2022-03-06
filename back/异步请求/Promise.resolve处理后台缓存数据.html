@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+
+</body>
+<script src="./request.js"></script>
+<script type="text/javascript">
+   //利用缓存解决重复请求的问题
+   function query(id){
+      let cache = query.cache || (query.cache = new Map())
+       if(cache.has(name)){
+           console.log("走缓存")
+           return Promise.resolve(cache.get(name))
+       }
+       return  ajax("http://localhost:3000/posts/"+id).then(value => {
+           cache.set(name,value);
+           return value
+       })
+   }
+   query(1).then(value => {
+       console.log(value)
+   })
+   setTimeout(()=>{
+       query(1).then(value => {
+           console.log(value)
+       })
+   },1000)
+</script>
+</html>

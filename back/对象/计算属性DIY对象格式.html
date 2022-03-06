@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    let person = [
+        {
+            id: 1,
+            name: "xsc",
+            age: 24
+        },{
+            id: 2,
+            name: "kkd",
+            age: 24
+        },{
+            id: 3,
+            name: "zzp",
+            age: 24
+        }
+    ]
+    /*
+    * 将上面的格式转为下面的格式
+    * */
+    /*let personDate = {
+        "dt"+id:{
+            id: 3,
+            name: "zzp",
+            age: 24
+        },
+        "dt"+id:{
+            id: 3,
+            name: "zzp",
+            age: 24
+        },
+    }*/
+    //计算出新的属性，构造新格式的对象
+    let personRes = person.reduce((obj,curr,index)=>{
+        obj[`${curr["name"]}-${index+1}`] = curr;
+        return obj
+    },{})
+    //合并对象
+    // Object.assign()
+    // console.log(JSON.stringify(personRes,null,2))
+
+
+    //遍历对象
+    let personObj = {
+        id: 3,
+        name: "zzp",
+        age: 24
+    }
+    for (const [id,name,age,] of Object.entries(personObj)) {
+        console.log(id)
+    }
+    /*
+    * Object.entries() 方法返回一个给定对象自身可枚举属性的键值对数组，
+    * 其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in
+    * 循环也枚举原型链中的属性）。
+    * */
+    console.log(Object.entries(personObj))
+</script>
+</html>

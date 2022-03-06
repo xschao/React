@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    "use strict"
+   let hd = {name:"xscz"}
+   hd.show = function (){
+        return "hello"
+   }
+   //设置对象不继承原型链
+   // Object.setPrototypeOf(hd,null);
+   //改变对象的原型集成链
+   let hd0 = {age:12}
+    // hd._proto_ = hd0
+   Object.setPrototypeOf(hd,hd0)
+   //可以直接使用父原型链上的方法和属性
+   console.log(hd.age);
+    console.log(hd)
+
+
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+   /* 面向对象语言中 this 表示当前对象的一个引用。
+
+    但在 JavaScript 中 this 不是固定不变的，它会随着执行环境的改变而改变。
+
+    在方法中，this 表示该方法所属的对象。
+    如果单独使用，this 表示全局对象。
+    在函数中，this 表示全局对象。
+    在函数中，在严格模式下，this 是未定义的(undefined)。
+    在事件中，this 表示接收事件的元素。
+    类似 call() 和 apply() 方法可以将 this 引用到任何对象。
+    */
+   "use strict"
+   //使用var声明变量，变量会挂在window全局对象上（变量提示），这对
+   //代码存在很大隐患，容易重名覆盖，使用严格模式后这可以避免，因此在
+   //定义变量的时候，我们应该用了let 和const来定义
+   var name='小明',age=10;
+   var obj = {
+       name:'小花',
+       age:this.age, //this->全局
+       myFunc:function (){
+           //this指向的当前对象的实例 this->obj实例
+        console.log(this.name+"年龄:"+this.age+"this:"+JSON.stringify(this));
+       }
+   }
+   console.log("年龄:"+obj.age+""+"姓名："+obj.name)
+   obj.myFunc()
+   console.log(obj.age)
+
+   function shows(){
+       //这里的this指向外面的作用域，时window，在全局上
+       //当使用严格模式后，则不能在全局对象中输出此属性undefined
+       console.log(this.name)
+   }
+    shows()
+
+</script>
+</html>

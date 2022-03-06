@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    let arr = new Array([1,2,3,4,5,6,7,8])
+    // console.table(arr)
+    function sum(...args){
+        return args.reduce((s,v)=>{
+            return (s += v);
+        },0)
+    }
+    arr.forEach((v)=> console.log(v))
+
+    console.log(sum(2,3,6,4))
+    //将字符串转化字符数组
+    const [...arr1] ="abcd";
+    console.log(arr1)
+
+    //多参数传递
+    let [name,...args] = ["xsc",2,3,4,5,3,2]
+    console.log(args)
+</script>
+</html>

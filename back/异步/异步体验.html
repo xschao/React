@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    div{
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        position: absolute;
+    }
+  </style>
+</head>
+<body>
+<div></div>
+</body>
+<script type="text/javascript">
+    /*
+    * 封装一个定时器
+    * */
+    function interval(callback, delay=200) {
+        let jobId = setInterval(()=>callback(jobId), delay)
+        console.log(jobId)
+    }
+    interval((job)=>{
+        let div = document.querySelector("div");
+        let left = parseInt(window.getComputedStyle(div).left)
+        div.style.left = left  + 10 + 'px'
+        console.log("****************",left)
+        if(left>=100){
+            clearInterval(job)
+            interval(job=>{
+                let left = parseInt(window.getComputedStyle(div).left)
+                div.style.left = left  - 10 + 'px'
+                if(left<=10){
+                    clearInterval(job)
+                }
+            })
+        }
+    })
+    //待主线程执行结束后才会执行定时器内容
+    for (let i = 0; i < 10000; i++) {
+        console.log("================="+i)
+
+    }
+</script>
+</html>

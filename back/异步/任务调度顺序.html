@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    /*
+   详情： https://zhuanlan.zhihu.com/p/78113300
+   视频：https://www.bilibili.com/video/BV15J411G7FG?p=8
+    * 宏任务包含：
+        script(整体代码)
+        setTimeout
+        setInterval
+        I/O
+        UI交互事件
+        postMessage
+        MessageChannel
+        setImmediate(Node.js 环境)
+    微任务包含：
+        Promise.then
+        Object.observe
+        MutationObserver
+        process.nextTick(Node.js 环境)
+    * */
+  /*
+  * script(宏)->Promise(微)->setTimeout(宏)
+  * */
+  //宏任务
+  setTimeout(()=>{
+      console.log(5)
+  },0)
+  //主线程任务
+  console.log(1);
+
+  new Promise(()=>{
+      //与主线程任务一致，里面是同步的代码块
+      console.log(2);
+  })
+  new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+          console.log("执行完promise代码块才会执行then微任务")
+          resolve();
+      },0)
+      //then微任务，会等主线程中的任务执行结束后才会执行
+  }).then(()=>{
+      console.log(4)
+  })
+  //主线程任务
+  console.log(3);
+
+
+
+  // 你会发现打印顺序是1234，如果你觉得new promise()里面的也是微任务的画，打印顺序应该是1324
+</script>
+</html>

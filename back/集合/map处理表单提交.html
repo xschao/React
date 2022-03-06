@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<input type="text" name="name" value="">
+<input type="text" name="password" value="">
+<input type="text" name="age" value="">
+<input type="text" name="sex" value="">
+<button>提交</button>
+</body>
+<script type="text/javascript">
+  const inputs = document.querySelectorAll("input");
+  let inputMaps = new Map();
+  const submit = document.querySelector("button");
+  submit.addEventListener('click',event=>{
+      inputs.forEach(item=>{
+          inputMaps.set(item.getAttribute("name"),item.value)
+      })
+      let obj = Object.create(null)
+      for (let[k,v] of inputMaps) {
+          obj[k] = v;
+      }
+      console.log(JSON.stringify(obj));
+  })
+  /*
+  * 所以在提交表单的时候，我们可以用选择器进行批量操作。如果有分布表单，则运用选择器中的
+  * 选择子类的标签，再通过合并集合的形似提交最后的数据
+  * */
+</script>
+</html>

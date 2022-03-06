@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style type="text/css">
+  .error{
+      border: solid 6px red;
+  }
+</style>
+<body>
+<input type="text" validate rule="max:12,min:3">
+<input type="text" validate rule="max:10,min:3">
+<input type="text" validate rule="isNumber">
+</body>
+<script type="text/javascript">
+  class Validate{
+      max(value,len){
+          return value.length <= len;
+      }
+      min(value,len){
+          return value.length >= len;
+      }
+      isNumber(value){
+          return /^\d+$/.test(value);
+      }
+  }
+  function ProxyFactory(target){
+      //target 代理表单元素
+      return new Proxy(target,{
+          //返回元素
+          get(target, p, receiver) {
+              return  target[p]
+          },
+          set(target, p, element, receiver) {
+              let validate = new Validate();
+              //将传递过来的数据进行验证逻辑
+              const rule = element.getAttribute("rule");
+              let state = rule.split(",").every(rule=>{
+                  // console.log(rule)  ruleName =  0 == max: 1 == 10
+                  const ruleName = rule.split(":");
+                  return validate[ruleName[0]](element.value,ruleName[1])
+              })
+              element.classList[state ? "remove" : "add"]("error")
+              return true
+          }
+      })
+  }
+  const proxy = new ProxyFactory(document.querySelectorAll("[validate]"))
+  //遍历属性会触发get方法
+  proxy.forEach((item,i)=>{
+      // console.log(item)
+      item.addEventListener('keyup',function (){
+          //会触发代理对象的set方法，因此可以传递数据给代理对象
+          //将当元素传递给代理对象，交给他处理业务逻辑
+          //和双向绑定一样，把数据传递给代理对象，
+          proxy[i] = this
+      })
+  })
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+   let person = {
+       id:1,
+       age:23
+   }
+   person.sex = 'nan'
+   delete person.id //删除属性
+   //给对象添加属性
+   person.show = function (){
+       console.log("append ...show func")
+   }
+   //变量对象属性的值
+   for (const key in person) {
+       console.log(person[key])
+   }
+   //对向的展开和合并
+   console.log({...person,address:"南昌"})
+   //覆盖当前的属性 --->可以用该更改配置或者什么的应用
+   console.log({...person,address:"九江"})
+
+   /*
+   * 属性检测
+   * */
+
+   let arr = [1,2,3]
+   console.log('length' in arr)//检测当前对象及原型链中的属性
+   console.log(arr.hasOwnProperty("length"))//值检测当前的属性
+   console.log('concat' in arr)
+   console.log(arr.hasOwnProperty("concat"))
+</script>
+</html>

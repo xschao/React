@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+  let map = new Map([["name","xsc"],["age","12"]]);
+  map.set((func)=>{return func},"匿名函数")
+  console.log(map)
+  console.log(...map,...new Map([["name","xsv"]]))
+  for (const [key,value] of map) {
+      console.log(key,value)
+  }
+</script>
+</html>
